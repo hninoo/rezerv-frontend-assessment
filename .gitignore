@@ -28,6 +28,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+.codex-screenshots/
 
 # OS and editor files
 .DS_Store
@@ -35,6 +36,7 @@ Thumbs.db
 .idea/
 .vscode/
 .agents/
+.claude/
 
 # Docker and local runtime artifacts
 *.pid

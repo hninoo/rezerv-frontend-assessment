@@ -1,0 +1,964 @@
+$cream: #fff2ec;
+$cream-soft: #fff8f2;
+$blue: #6a3cff;
+$blue-deep: #1e0e24;
+$gold: #ffd23e;
+$gold-soft: #ffe9a3;
+$pink: #ff2d9b;
+$berry: #ff2d9b;
+$cyan: #22d3ee;
+$lime: #b6ff3d;
+$jade: #22d3ee;
+$ink: #17122e;
+$plum-black: #1e0e24;
+$plum-top: #2a1230;
+$plum-mid: #3a1a38;
+$plum-bottom: #241026;
+$white: #ffffff;
+
+.blobversePage {
+  position: relative;
+  min-height: 100vh;
+  overflow-x: clip;
+  background:
+    radial-gradient(circle at 14% 12%, rgba($pink, 0.13), transparent 22rem),
+    radial-gradient(circle at 84% 18%, rgba($blue, 0.12), transparent 24rem),
+    radial-gradient(circle at 70% 82%, rgba($cyan, 0.08), transparent 24rem),
+    linear-gradient(180deg, $plum-top 0%, $plum-mid 48%, $plum-bottom 100%);
+  color: $cream;
+  font-family: var(--font-rounded), "Hiragino Maru Gothic ProN", ui-rounded, system-ui, sans-serif;
+  isolation: isolate;
+  letter-spacing: 0;
+}
+
+.chromeHeader {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 60;
+  min-height: 5rem;
+  pointer-events: none;
+
+  > * {
+    pointer-events: auto;
+  }
+}
+
+.brandMark {
+  position: absolute;
+  top: 2.35rem;
+  left: 2.35rem;
+  display: inline-flex;
+  max-width: 24rem;
+  align-items: center;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font-family: var(--font-display), var(--font-rounded), system-ui, sans-serif;
+  font-size: clamp(1.8rem, 2.55vw, 2.32rem);
+  font-weight: 900;
+  line-height: 0.9;
+  letter-spacing: 0.02em;
+  overflow-wrap: anywhere;
+  padding: 0;
+
+  span {
+    display: block;
+    background: linear-gradient(90deg, #ff5fa2, #8e6bff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+
+  &:focus-visible {
+    border-radius: 0.35rem;
+    outline: 3px solid rgba($lime, 0.92);
+    outline-offset: 0.35rem;
+  }
+
+  @media (min-width: 768px) {
+    max-width: 24rem;
+  }
+}
+
+.menuPill {
+  position: absolute;
+  top: 0.9rem;
+  right: 1.1rem;
+  display: inline-flex;
+  width: 3.5rem;
+  height: 3.5rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.28rem;
+  border: 0;
+  border-radius: 0.8rem;
+  background: rgba(#151515, 0.94);
+  box-shadow: 0 0.9rem 2rem rgba(#000, 0.22);
+  cursor: pointer;
+  transition:
+    background 180ms ease,
+    transform 180ms ease;
+
+  span {
+    display: block;
+    width: 0.34rem;
+    height: 0.34rem;
+    border-radius: 50%;
+    background: rgba($cream-soft, 0.78);
+  }
+
+  &:hover,
+  &:focus-visible {
+    background: rgba(#202020, 0.98);
+    outline: 3px solid rgba($lime, 0.92);
+    outline-offset: 0.18rem;
+    transform: translateY(-2px);
+  }
+
+  &[data-open="true"] {
+    background: rgba($plum-black, 0.98);
+  }
+}
+
+.sceneMenu {
+  position: absolute;
+  top: 4.95rem;
+  right: 1.1rem;
+  display: grid;
+  width: min(19.5rem, calc(100vw - 2rem));
+  gap: 0.85rem;
+  padding: 0.95rem;
+  border: 1px solid rgba($white, 0.16);
+  border-radius: 1.05rem;
+  background:
+    linear-gradient(180deg, rgba($plum-black, 0.96), rgba(#120a2e, 0.94)),
+    rgba($plum-black, 0.96);
+  box-shadow: 0 1.4rem 3.4rem rgba(#000, 0.34);
+  color: $cream;
+  pointer-events: auto;
+  transform-origin: top right;
+  backdrop-filter: blur(16px);
+}
+
+.sceneMenuTitle {
+  margin: 0;
+  color: rgba($cream, 0.66);
+  font-family: var(--font-rounded), system-ui, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.sceneMenuHelp {
+  margin: -0.35rem 0 0;
+  color: rgba($cream, 0.58);
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.sceneMenuList {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.sceneMenuButton {
+  display: grid;
+  grid-template-columns: 2.35rem minmax(0, 1fr);
+  gap: 0.72rem;
+  align-items: center;
+  width: 100%;
+  min-height: 4.1rem;
+  padding: 0.72rem 0.78rem;
+  border: 1px solid rgba($white, 0.13);
+  border-radius: 0.78rem;
+  background: rgba($white, 0.06);
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+
+  &:hover,
+  &:focus-visible {
+    border-color: rgba($lime, 0.72);
+    background: rgba($white, 0.1);
+    outline: none;
+    transform: translateY(-2px);
+  }
+
+  &[data-current="true"] {
+    border-color: rgba($cyan, 0.72);
+    background: rgba($cyan, 0.12);
+    box-shadow: inset 0 0 0 1px rgba($cyan, 0.22);
+  }
+}
+
+.sceneMenuIndex {
+  display: grid;
+  width: 2.35rem;
+  aspect-ratio: 1;
+  place-items: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba($pink, 0.95), rgba($blue, 0.95));
+  color: $white;
+  font-family: var(--font-display), var(--font-rounded), system-ui, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.sceneMenuText {
+  display: grid;
+  min-width: 0;
+  gap: 0.18rem;
+
+  strong,
+  em {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  strong {
+    color: rgba($cream, 0.74);
+    font-size: 0.74rem;
+    font-style: normal;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  em {
+    color: $white;
+    font-family: var(--font-display), var(--font-rounded), system-ui, sans-serif;
+    font-size: 0.82rem;
+    font-style: normal;
+    font-weight: 800;
+    letter-spacing: 0.01em;
+  }
+}
+
+.sceneLive {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.topPill {
+  display: inline-grid;
+  min-width: 4rem;
+  min-height: 2.1rem;
+  place-items: center;
+  border: 2px solid $ink;
+  border-radius: 999px;
+  background: $ink;
+  box-shadow: 0 0.9rem 2rem rgba($ink, 0.22);
+  color: $lime;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  transition:
+    background 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
+
+  &:hover,
+  &:focus-visible {
+    background: $pink;
+    color: $white;
+    outline: none;
+    transform: translateY(-2px) rotate(-3deg);
+  }
+}
+
+.socialDock {
+  position: fixed;
+  bottom: 2.7rem;
+  left: 1.25rem;
+  z-index: 40;
+  display: flex;
+  gap: 0.65rem;
+
+  a {
+    display: grid;
+    width: 2.4rem;
+    aspect-ratio: 1;
+    place-items: center;
+    border: 2px solid $ink;
+    border-radius: 50%;
+    background: $ink;
+    box-shadow: 0 0.8rem 1.8rem rgba($ink, 0.24);
+    color: $cyan;
+    font-family: var(--font-rounded), "Hiragino Maru Gothic ProN", ui-rounded, system-ui, sans-serif;
+    font-size: 0.72rem;
+    font-weight: 900;
+    letter-spacing: 0.02em;
+    transition:
+      background 180ms ease,
+      color 180ms ease,
+      transform 180ms ease;
+
+    &:hover,
+    &:focus-visible {
+      background: $pink;
+      color: $white;
+      outline: none;
+      transform: translateY(-3px) rotate(-8deg) scale(1.08);
+    }
+  }
+
+  @media (min-width: 768px) {
+    bottom: 3.1rem;
+    left: 2.5rem;
+  }
+}
+
+.collectionBlob {
+  position: fixed;
+  right: -1.8rem;
+  bottom: -1.1rem;
+  z-index: 40;
+  display: grid;
+  width: 12rem;
+  aspect-ratio: 1.42;
+  place-items: center;
+  border-radius: 52% 48% 47% 53% / 44% 58% 42% 56%;
+  background: linear-gradient(120deg, #b42680, #4d2c88 40%, #187f8a 70%, #c89f27);
+  background-size: 220% 220%;
+  box-shadow: 0 1.4rem 3.4rem rgba($plum-black, 0.42);
+  color: $white;
+  font-family: var(--font-display), var(--font-rounded), system-ui, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  overflow-wrap: anywhere;
+  padding: 1rem 2rem 1.4rem 1rem;
+  text-transform: uppercase;
+  text-align: center;
+  will-change: border-radius, background-position;
+  animation:
+    blobMorph 9s ease-in-out infinite alternate,
+    gradientPan 7s linear infinite;
+  transition:
+    box-shadow 240ms ease,
+    filter 240ms ease;
+
+  span {
+    display: block;
+  }
+
+  &:hover,
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 1.8rem 4.2rem rgba($pink, 0.26);
+    filter: saturate(1.14) brightness(1.02);
+  }
+
+  @media (min-width: 768px) {
+    right: -2.1rem;
+    bottom: -1.4rem;
+    width: 16rem;
+    font-size: 0.9rem;
+  }
+}
+
+@keyframes blobMorph {
+  0% {
+    border-radius: 52% 48% 47% 53% / 44% 58% 42% 56%;
+  }
+
+  50% {
+    border-radius: 42% 58% 60% 40% / 56% 42% 58% 44%;
+  }
+
+  100% {
+    border-radius: 58% 42% 40% 60% / 48% 62% 38% 52%;
+  }
+}
+
+@keyframes gradientPan {
+  to {
+    background-position: 220% 0;
+  }
+}
+
+.scrollScene {
+  position: relative;
+  min-height: 100svh;
+  background: linear-gradient(180deg, $plum-top 0%, $plum-mid 48%, $plum-bottom 100%);
+  color: $cream;
+  isolation: isolate;
+  overscroll-behavior: none;
+  touch-action: none;
+
+  &::before {
+    position: fixed;
+    inset: -12%;
+    z-index: 0;
+    background:
+      radial-gradient(30% 30% at 20% 24%, rgba($pink, 0.24), transparent 62%),
+      radial-gradient(28% 28% at 82% 18%, rgba($cyan, 0.18), transparent 62%),
+      radial-gradient(34% 34% at 66% 82%, rgba($blue, 0.22), transparent 64%),
+      radial-gradient(30% 30% at 14% 82%, rgba($gold, 0.1), transparent 62%);
+    filter: blur(58px);
+    content: "";
+    opacity: 0.78;
+    pointer-events: none;
+    will-change: transform;
+    animation: auroraDrift 26s ease-in-out infinite alternate;
+  }
+
+  &::after {
+    position: fixed;
+    inset: 0;
+    z-index: 2;
+    background:
+      radial-gradient(ellipse at 50% 44%, rgba($plum-black, 0) 38%, rgba($plum-black, 0.22) 72%, rgba($plum-black, 0.35) 100%),
+      linear-gradient(90deg, rgba($plum-black, 0.18), rgba($plum-black, 0) 28%, rgba($plum-black, 0) 72%, rgba($plum-black, 0.18));
+    content: "";
+    pointer-events: none;
+  }
+}
+
+@keyframes auroraDrift {
+  0% {
+    transform: translate3d(-3%, -2%, 0) rotate(0deg) scale(1.06);
+  }
+
+  50% {
+    transform: translate3d(3%, 2%, 0) rotate(8deg) scale(1.16);
+  }
+
+  100% {
+    transform: translate3d(-2%, 3%, 0) rotate(-6deg) scale(1.1);
+  }
+}
+
+.webglStage {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateZ(0);
+  transition: opacity 520ms ease;
+
+  &[data-ready="true"] {
+    opacity: 1;
+  }
+}
+
+.webglCanvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.webglCanvasBase {
+  z-index: 0;
+}
+
+.webglCanvasOverlay {
+  z-index: 1;
+}
+
+.scrollContent {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.scrollSpacer {
+  position: relative;
+  z-index: 0;
+  min-height: 100svh;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.scenePanel {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  min-height: 100svh;
+  align-items: center;
+  opacity: 0;
+  padding: 6.5rem 1.25rem 6rem;
+  pointer-events: none;
+  transform: translate3d(0, 1.65rem, 0) scale(0.985);
+  transition:
+    opacity 520ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 620ms cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0s linear 620ms;
+  visibility: hidden;
+
+  &[data-section-visibility="true"] {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    transition:
+      opacity 520ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 720ms cubic-bezier(0.16, 1, 0.3, 1),
+      visibility 0s;
+    visibility: visible;
+  }
+
+  &[data-scene-theme="night"] {
+    color: $white;
+
+    .sceneTopline {
+      color: rgba($white, 0.76);
+    }
+
+    .sceneCopy > p {
+      color: rgba($white, 0.78);
+    }
+  }
+
+  &[data-scene-kind="opening"] {
+    place-items: center;
+    overflow: hidden;
+    padding: 0;
+    text-align: center;
+
+    .sceneTopline {
+      display: none;
+    }
+
+    .sceneCopy {
+      position: absolute;
+      top: 64%;
+      left: 50%;
+      z-index: 3;
+      width: 90%;
+      transform: translate(-50%, -50%);
+      justify-items: center;
+      isolation: isolate;
+      text-align: center;
+
+      h2 {
+        position: relative;
+        max-width: none;
+        background: linear-gradient(92deg, #ffb347, #ff5fa2 40%, #5bd8e6 72%, #8e6bff);
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        font-family: var(--font-display), var(--font-rounded), system-ui, sans-serif;
+        font-size: clamp(3rem, 6vw, 4.5rem);
+        font-weight: 900;
+        line-height: 0.95;
+        letter-spacing: 0.01em;
+        text-shadow: none;
+        -webkit-text-fill-color: transparent;
+        animation: none;
+
+        [data-char] {
+          background: none;
+          color: transparent;
+          -webkit-text-fill-color: transparent;
+        }
+      }
+
+      > p {
+        max-width: none;
+        margin-top: 0.875rem;
+        color: #f1eaff;
+        font-size: clamp(1rem, 2vw, 1.8rem);
+        font-weight: 600;
+        letter-spacing: 0.01em;
+        line-height: 1.25;
+        opacity: 0.96;
+        text-shadow: none;
+      }
+
+      @media (min-width: 768px) {
+        gap: 1rem;
+
+        > p {
+          margin-top: 0.875rem;
+        }
+      }
+
+      [data-char] {
+        opacity: 1 !important;
+        transform: translate3d(0, 0, 0) !important;
+      }
+
+      .openingTitleArt + h2 {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        clip-path: inset(50%);
+        opacity: 0;
+        pointer-events: none;
+      }
+    }
+  }
+
+  &[data-scene-kind="space"] {
+    align-items: end;
+    padding-bottom: 7rem;
+  }
+
+  &[data-scene-kind="return"] {
+    place-items: center;
+    text-align: center;
+
+    .sceneCopy {
+      width: min(100%, 58rem);
+      justify-items: center;
+      isolation: isolate;
+      text-align: center;
+
+      h2 {
+        max-width: 12ch;
+        filter: none;
+        text-shadow: none;
+      }
+
+      > p {
+        max-width: min(92vw, 56rem);
+        color: rgba($white, 0.86);
+        font-size: clamp(0.98rem, 1.6vw, 1.12rem);
+        line-height: 1.45;
+        text-shadow: none;
+
+        @media (min-width: 900px) {
+          white-space: nowrap;
+        }
+      }
+    }
+  }
+
+  @media (min-width: 768px) {
+    padding: 7.2rem 4rem 6rem;
+
+  }
+}
+
+.sceneTopline {
+  position: absolute;
+  top: 5.3rem;
+  right: 1.25rem;
+  left: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  color: rgba($blue, 0.72);
+  font-family: var(--font-rounded), "Hiragino Maru Gothic ProN", ui-rounded, system-ui, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0;
+  text-transform: uppercase;
+
+  @media (min-width: 768px) {
+    top: 7.3rem;
+    right: 4rem;
+    left: 4rem;
+  }
+}
+
+.sceneTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.48rem;
+  min-width: 0;
+  padding: 0.34rem 0.82rem 0.34rem 0.62rem;
+  border: 1.5px solid currentColor;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.sceneTagDot {
+  flex: none;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.sceneProgressMark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.sceneDots {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.34rem;
+
+  b {
+    display: block;
+    width: 0.42rem;
+    height: 0.42rem;
+    border-radius: 50%;
+    background: currentColor;
+    opacity: 0.26;
+    transition: opacity 0.45s ease, transform 0.45s ease;
+
+    &[data-done="true"] {
+      opacity: 0.68;
+    }
+
+    &[data-current="true"] {
+      opacity: 1;
+      transform: scale(1.5);
+      box-shadow: 0 0 0.5rem currentColor;
+    }
+  }
+}
+
+.sceneCount {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.12rem;
+  font-variant-numeric: tabular-nums;
+
+  b {
+    font-size: 1.15rem;
+    line-height: 1;
+  }
+
+  span {
+    opacity: 0.45;
+  }
+
+  em {
+    font-style: normal;
+    opacity: 0.55;
+  }
+}
+
+.sceneCopy {
+  position: relative;
+  display: grid;
+  width: min(100%, 38rem);
+  gap: 0.9rem;
+
+  > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  h2,
+  p {
+    margin: 0;
+  }
+
+  [data-char] {
+    display: inline-block;
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
+    will-change: opacity, transform;
+  }
+
+  h2 {
+    max-width: 16ch;
+    font-family: var(--font-display), var(--font-rounded), system-ui, sans-serif;
+    font-size: clamp(2.6rem, 9vw, 3.4rem);
+    font-weight: 900;
+    line-height: 0.98;
+    letter-spacing: -0.015em;
+    text-transform: uppercase;
+    overflow-wrap: anywhere;
+    text-wrap: balance;
+    white-space: pre-line;
+    word-break: normal;
+    background: linear-gradient(100deg, $blue 0%, $pink 34%, $gold 60%, $cyan 100%);
+    background-size: 220% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    will-change: background-position;
+    animation: hueShift 9s linear infinite;
+
+    [data-char] {
+      background: none;
+      color: var(--char-color, #ff7eb6);
+      -webkit-text-fill-color: var(--char-color, #ff7eb6);
+    }
+  }
+
+  > p {
+    max-width: 34rem;
+    color: rgba($ink, 0.72);
+    font-size: 1rem;
+    font-weight: 750;
+    line-height: 1.65;
+    overflow-wrap: anywhere;
+  }
+
+  @media (min-width: 768px) {
+    width: min(52vw, 44rem);
+
+    h2 {
+      font-size: 4.2rem;
+    }
+
+    > p {
+      font-size: 1.14rem;
+    }
+  }
+
+  @media (min-width: 1180px) {
+    h2 {
+      font-size: 5rem;
+    }
+  }
+}
+
+.openingTitleArt {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  justify-items: center;
+  width: min(90vw, 42.5rem);
+  gap: 0;
+  filter: none;
+  overflow: visible;
+
+  span {
+    display: block;
+    background: linear-gradient(92deg, #ffb347 0%, #ff5fa2 34%, #5bd8e6 72%, #8e6bff 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    font-family: var(--font-display), var(--font-rounded), system-ui, sans-serif;
+    font-size: clamp(3rem, 6vw, 4.5rem);
+    font-weight: 950;
+    letter-spacing: 0.01em;
+    line-height: 0.95;
+    text-shadow: none;
+    text-transform: uppercase;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+@keyframes hueShift {
+  to {
+    background-position: 220% 0;
+  }
+}
+
+.sceneProgress {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 2.5rem;
+  left: 1.25rem;
+  z-index: 45;
+  display: none;
+  height: 0.24rem;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba($ink, 0.12);
+  pointer-events: none;
+
+  span {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, $pink, $blue 45%, $cyan 75%, $lime);
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+
+  @media (min-width: 768px) {
+    right: 2.5rem;
+    bottom: 1.1rem;
+    left: 2.5rem;
+  }
+}
+
+.bubblePopBurst {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 49;
+  display: inline-grid;
+  min-width: 3.2rem;
+  min-height: 2.2rem;
+  place-items: center;
+  border-radius: 999px;
+  background: linear-gradient(135deg, $lime, $cyan);
+  box-shadow: 0 0.85rem 2.2rem rgba($cyan, 0.28);
+  color: $plum-black;
+  font-family: var(--font-display), var(--font-rounded), system-ui, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 950;
+  letter-spacing: 0.02em;
+  opacity: 0;
+  pointer-events: none;
+  text-transform: uppercase;
+  transform: translate3d(-999px, -999px, 0) scale(0.72);
+  will-change: opacity, transform;
+}
+
+.bubbleTouchHint {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  left: 1rem;
+  z-index: 48;
+  display: none;
+  justify-content: center;
+  padding: 0.68rem 0.9rem;
+  border: 1px solid rgba($white, 0.16);
+  border-radius: 999px;
+  background: rgba($plum-black, 0.82);
+  box-shadow: 0 1rem 2.3rem rgba(#000, 0.24);
+  color: rgba($cream, 0.92);
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  opacity: 0;
+  pointer-events: none;
+  text-transform: uppercase;
+  transform: translateY(0.7rem);
+  transition:
+    opacity 220ms ease,
+    transform 220ms ease;
+  backdrop-filter: blur(14px);
+
+  @media (pointer: coarse) {
+    display: flex;
+
+    &[data-active="true"] {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .scenePanel[data-scene-kind="opening"],
+  .scenePanel[data-scene-kind="return"] {
+    .sceneCopy {
+      margin-bottom: 4rem;
+    }
+  }
+
+  .scenePanel[data-scene-kind="space"] {
+    .sceneCopy {
+      width: min(100%, 23rem);
+    }
+  }
+}

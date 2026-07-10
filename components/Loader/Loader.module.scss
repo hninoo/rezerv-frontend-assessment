@@ -1,0 +1,286 @@
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #120a2e;
+  color: #cbbcf5;
+  isolation: isolate;
+}
+
+.blobWrap {
+  position: relative;
+  width: clamp(13rem, 38vw, 20rem);
+  aspect-ratio: 1;
+  animation: loaderBreathe 1.6s ease-in-out infinite;
+  transform-origin: 50% 55%;
+  will-change: transform;
+}
+
+.blob {
+  position: absolute;
+  inset: 0;
+  filter: drop-shadow(0 2rem 4rem rgba(96, 42, 180, 0.44));
+}
+
+.blobImage,
+.blobSweep {
+  position: absolute;
+  inset: 0;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.blobImage {
+  background-image: var(--blob);
+  animation: loaderShimmer 1.8s ease-in-out infinite;
+  will-change: filter;
+}
+
+.blobSweep {
+  background: linear-gradient(115deg, transparent 42%, rgba(255, 255, 255, 0.75) 50%, transparent 58%);
+  background-size: 280% 280%;
+  mix-blend-mode: screen;
+  opacity: 0;
+  pointer-events: none;
+  mask-image: var(--blob);
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-size: contain;
+  -webkit-mask-image: var(--blob);
+  -webkit-mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  animation: loaderSweep 1.3s ease-in-out infinite;
+  will-change: background-position, opacity;
+}
+
+.bloom {
+  position: absolute;
+  width: min(42rem, 84vw);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.62), rgba(198, 177, 255, 0.28) 26%, transparent 62%);
+  opacity: 0;
+  transform: scale(0.52);
+  pointer-events: none;
+}
+
+.progressHud {
+  position: absolute;
+  right: 0;
+  bottom: clamp(1.5rem, 5vw, 3rem);
+  left: 0;
+  display: grid;
+  gap: 0.7rem;
+  justify-items: center;
+}
+
+.counter {
+  margin: 0;
+  color: #cbbcf5;
+  font-family: var(--font-mono, "SFMono-Regular", Consolas, "Liberation Mono", monospace);
+  font-size: clamp(0.78rem, 2vw, 0.95rem);
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  line-height: 1;
+  text-transform: uppercase;
+  text-align: center;
+  text-shadow: 0 0 1.2rem rgba(203, 188, 245, 0.38);
+}
+
+.progressTrack {
+  width: min(11rem, 44vw);
+  height: 0.28rem;
+  overflow: hidden;
+  border: 1px solid rgba(203, 188, 245, 0.28);
+  border-radius: 999px;
+  background: rgba(203, 188, 245, 0.14);
+  box-shadow: 0 0 1.2rem rgba(139, 102, 230, 0.28);
+}
+
+.progressFill {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #7d5cff, #cbbcf5 52%, #ffffff);
+  box-shadow: 0 0 1.1rem rgba(203, 188, 245, 0.68);
+  transform: scaleX(var(--progress));
+  transform-origin: 0 50%;
+  transition: transform 160ms ease-out;
+}
+
+.particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0.42rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.95), transparent 30%),
+    rgba(210, 191, 255, 0.84);
+  box-shadow: 0 0 1rem rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  transform: translate3d(-50%, -50%, 0) scale(0.2);
+}
+
+.loader[data-exiting="true"] {
+  pointer-events: none;
+  animation: loaderFadeOut 350ms ease 250ms forwards;
+
+  .blobWrap {
+    animation: loaderPopExit 600ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .bloom {
+    animation: loaderBloom 420ms ease-out forwards;
+  }
+
+  .progressHud {
+    animation: loaderCounterExit 260ms ease forwards;
+  }
+
+  .particle {
+    animation: loaderParticleBurst 520ms cubic-bezier(0.16, 1, 0.3, 1) var(--delay) forwards;
+  }
+}
+
+@keyframes loaderBreathe {
+  0%,
+  100% {
+    transform: translateY(5px) scale(1) rotate(-1.5deg);
+  }
+
+  50% {
+    transform: translateY(-5px) scale(1.05) rotate(1.5deg);
+  }
+}
+
+@keyframes loaderShimmer {
+  0%,
+  100% {
+    filter: brightness(0.97) hue-rotate(-6deg) saturate(1);
+  }
+
+  50% {
+    filter: brightness(1.15) hue-rotate(7deg) saturate(1.18);
+  }
+}
+
+@keyframes loaderSweep {
+  0% {
+    background-position: 150% 150%;
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 1;
+  }
+
+  55% {
+    opacity: 1;
+  }
+
+  70% {
+    opacity: 0;
+  }
+
+  100% {
+    background-position: -60% -60%;
+    opacity: 0;
+  }
+}
+
+@keyframes loaderPopExit {
+  0% {
+    opacity: 1;
+    transform: translateY(5px) scale(1) rotate(-1.5deg);
+  }
+
+  34% {
+    opacity: 1;
+    transform: translateY(-3px) scale(1.15) rotate(1.5deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-0.5rem) scale(0.72) rotate(3deg);
+  }
+}
+
+@keyframes loaderBloom {
+  0% {
+    opacity: 0;
+    transform: scale(0.52);
+  }
+
+  36% {
+    opacity: 0.9;
+    transform: scale(0.92);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.36);
+  }
+}
+
+@keyframes loaderParticleBurst {
+  0% {
+    opacity: 0;
+    transform: translate3d(-50%, -50%, 0) scale(0.2);
+  }
+
+  12% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate3d(calc(-50% + var(--x)), calc(-50% + var(--y) + 42px), 0) scale(0.05);
+  }
+}
+
+@keyframes loaderCounterExit {
+  to {
+    opacity: 0;
+    transform: translateY(0.45rem);
+  }
+}
+
+@keyframes loaderFadeOut {
+  to {
+    opacity: 0;
+    transform: scale(1.02);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blobWrap,
+  .blobImage,
+  .blobSweep,
+  .loader[data-exiting="true"],
+  .loader[data-exiting="true"] .blobWrap,
+  .loader[data-exiting="true"] .bloom,
+  .loader[data-exiting="true"] .progressHud,
+  .loader[data-exiting="true"] .particle {
+    animation-duration: 1ms;
+    animation-iteration-count: 1;
+  }
+
+  .blobSweep,
+  .particles {
+    display: none;
+  }
+}
