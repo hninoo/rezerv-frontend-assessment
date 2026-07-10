@@ -1,0 +1,271 @@
+$ink: #101820;
+$cloud: #f7f4ef;
+$paper: #ffffff;
+$brass: #d7a94b;
+$jade: #1f8a70;
+$lacquer: #9b2335;
+$line: rgba($ink, 0.1);
+
+:root {
+  color-scheme: light;
+  --background: #{$cloud};
+  --foreground: #{$ink};
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background: var(--background);
+  color: var(--foreground);
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.page {
+  min-height: 100vh;
+  padding: 2.5rem 1.5rem;
+
+  &--light {
+    background: $cloud;
+    color: $ink;
+  }
+
+  &--dark {
+    background:
+      radial-gradient(circle at 20% 20%, rgba($brass, 0.22), transparent 28rem),
+      radial-gradient(circle at 80% 10%, rgba($jade, 0.2), transparent 24rem),
+      $ink;
+    color: $cloud;
+  }
+}
+
+.container {
+  width: min(100%, 72rem);
+  margin: 0 auto;
+
+  &--narrow {
+    width: min(100%, 64rem);
+  }
+}
+
+.hero-grid {
+  display: grid;
+  gap: 2.5rem;
+
+  @media (min-width: 960px) {
+    grid-template-columns: minmax(0, 1fr) 26.25rem;
+    align-items: center;
+  }
+}
+
+.eyebrow {
+  margin: 0;
+  color: $jade;
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+
+  &--gold {
+    color: $brass;
+  }
+
+  &--red {
+    color: $lacquer;
+  }
+}
+
+.title {
+  margin: 1rem 0 0;
+  font-size: clamp(2.5rem, 8vw, 4rem);
+  line-height: 1.05;
+}
+
+.copy {
+  max-width: 42rem;
+  margin: 1.25rem 0 0;
+  color: rgba($ink, 0.72);
+  font-size: 1rem;
+  line-height: 1.75;
+
+  .page--dark & {
+    color: rgba($cloud, 0.75);
+  }
+}
+
+.route-grid,
+.character-grid {
+  display: grid;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.route-grid {
+  @media (min-width: 760px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.route-card,
+.character-card,
+.table-card,
+.state-card {
+  border: 1px solid $line;
+  border-radius: 0.5rem;
+  background: $paper;
+  box-shadow: 0 0.75rem 2rem rgba($ink, 0.06);
+}
+
+.route-card {
+  padding: 1.25rem;
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+
+  &:hover {
+    border-color: $jade;
+    box-shadow: 0 1rem 2.5rem rgba($ink, 0.1);
+    transform: translateY(-0.25rem);
+  }
+
+  h2 {
+    margin: 0;
+    font-size: 1.125rem;
+  }
+
+  p {
+    margin: 0.75rem 0 0;
+    color: rgba($ink, 0.7);
+    font-size: 0.875rem;
+    line-height: 1.6;
+  }
+}
+
+.character-card {
+  border-color: rgba($cloud, 0.1);
+  background: rgba($cloud, 0.06);
+  padding: 1rem;
+  box-shadow: none;
+
+  h2 {
+    margin: 0;
+    font-size: 1.125rem;
+  }
+
+  p {
+    margin: 0.5rem 0 0;
+    color: rgba($cloud, 0.72);
+    font-size: 0.875rem;
+    line-height: 1.6;
+  }
+}
+
+.class-list {
+  margin-top: 2rem;
+  overflow: hidden;
+}
+
+.class-row {
+  display: grid;
+  gap: 0.5rem;
+  padding: 1rem;
+  border-bottom: 1px solid $line;
+
+  &:last-child {
+    border-bottom: 0;
+  }
+
+  @media (min-width: 760px) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.table-card {
+  overflow-x: auto;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  text-align: left;
+  min-width: 54rem;
+
+  th {
+    background: $ink;
+    color: $cloud;
+    font-weight: 700;
+  }
+
+  th,
+  td {
+    padding: 0.875rem 1rem;
+  }
+
+  tr {
+    border-bottom: 1px solid $line;
+  }
+
+  tbody tr:last-child {
+    border-bottom: 0;
+  }
+
+  &__cell--pinned {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    box-shadow: 0.75rem 0 1rem rgba($ink, 0.08);
+  }
+
+  th.data-table__cell--pinned {
+    z-index: 2;
+  }
+
+  td.data-table__cell--pinned {
+    background: $paper;
+    font-weight: 700;
+  }
+}
+
+.state-card {
+  padding: 1.5rem;
+
+  &--error {
+    border-color: rgba($lacquer, 0.3);
+    color: $lacquer;
+  }
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 0.375rem;
+  background: $ink;
+  color: $cloud;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 700;
+  padding: 0.625rem 1rem;
+  transition: background 180ms ease;
+
+  &:hover {
+    background: $jade;
+  }
+}
