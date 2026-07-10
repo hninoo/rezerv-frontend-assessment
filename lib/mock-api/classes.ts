@@ -1,18 +1,25 @@
-import { sampleClasses } from "@/lib/data/classes";
+import { sampleClasses, type FitnessClass } from "@/lib/data/classes";
+import type { MockRequestOptions, MockResourceApi } from "./types";
+import { wait } from "./wait";
 
-type FetchClassesOptions = {
-  shouldFail?: boolean;
-  delayMs?: number;
-};
+type FetchClassesOptions = MockRequestOptions;
+
+export type ClassApi = MockResourceApi<FetchClassesOptions, FitnessClass>;
 
 export async function fetchClasses({ delayMs = 350, shouldFail = false }: FetchClassesOptions = {}) {
-  await new Promise((resolve) => {
-    setTimeout(resolve, delayMs);
-  });
+  await wait(delayMs);
 
   if (shouldFail) {
     throw new Error("Unable to load class timetable.");
   }
 
-  return Promise.resolve(sampleClasses);
+  return sampleClasses;
 }
+
+export const classApi: ClassApi = {
+  list: async (options = {}) => {
+    const rows = await fetchClasses(options);
+
+    return { rows, totalRows: rows.length };
+  }
+};

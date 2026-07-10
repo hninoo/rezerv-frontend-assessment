@@ -5,3 +5,15 @@ export function compareValues(a: string | number, b: string | number, direction:
 
   return direction === "asc" ? result : -result;
 }
+
+export function getNextSortDirection(currentDirection?: SortDirection) {
+  if (!currentDirection) {
+    return "asc";
+  }
+
+  if (currentDirection === "asc") {
+    return "desc";
+  }
+
+  return null;
+}
