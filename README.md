@@ -57,8 +57,6 @@ https://webgl-data-grid.vercel.app/room-bookings     Part 2 second table demo
 
 ## 3. Part 1: BLOBVERSE
 
-Reference used for motion study:
-
 Three scroll-driven scenes (defined in `features/blobverse/blobverse-scenes.ts`),
 preceded by a real asset preloader:
 
