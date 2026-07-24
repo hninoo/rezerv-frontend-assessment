@@ -1,4 +1,4 @@
-# Rezerv Frontend Assessment
+# WebGL Data Grid
 
 This project contains the two assessment parts:
 
