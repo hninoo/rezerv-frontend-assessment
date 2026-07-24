@@ -11,7 +11,7 @@ GSAP, Framer Motion, and Vitest.
 Deployed website:
 
 ```text
-https://rezerv-frontend-assessment.vercel.app
+https://webgl-data-grid.vercel.app
 ```
 
 ## 1. Setup Instructions
@@ -49,24 +49,15 @@ npm run test           # Vitest (use Node ≥ 20.12, e.g. `nvm use 22`)
 ## 2. Pages
 
 ```text
-https://rezerv-frontend-assessment.vercel.app/                  Part 1 animation page
-https://rezerv-frontend-assessment.vercel.app/blobverse         Part 1 review route
-https://rezerv-frontend-assessment.vercel.app/class-timetable   Part 2 class timetable table
-https://rezerv-frontend-assessment.vercel.app/room-bookings     Part 2 second table demo
+https://webgl-data-grid.vercel.app                  Part 1 animation page
+https://webgl-data-grid.vercel.app/blobverse         Part 1 review route
+https://webgl-data-grid.vercel.app/class-timetable   Part 2 class timetable table
+https://webgl-data-grid.vercel.app/room-bookings     Part 2 second table demo
 ```
 
 ## 3. Part 1: BLOBVERSE
 
 Reference used for motion study:
-
-```text
-https://nft.fluffyhugs.io/
-```
-
-The artwork, copy, and theme are original to this project. The reference was
-used only for animation pacing and page feel.
-
-### Which 3 Slides I Implemented
 
 Three scroll-driven scenes (defined in `features/blobverse/blobverse-scenes.ts`),
 preceded by a real asset preloader:
